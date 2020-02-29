@@ -2,11 +2,15 @@ package com.zx.tank;
 
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame
 {
+	int x = 200, y = 200;
+
 	public TankFrame()
 	{
 
@@ -14,6 +18,7 @@ public class TankFrame extends Frame
 		setResizable(false);// 能否改变大小
 		setTitle("tank  war"); // 标题
 		setVisible(true);
+		this.addKeyListener(new MyKeyListener());
 
 		addWindowListener(new WindowAdapter() // 匿名类 添加监听器
 		{
@@ -32,6 +37,25 @@ public class TankFrame extends Frame
 	@Override
 	public void paint(Graphics g)
 	{
-		g.fillRect(200, 200, 150, 50);
+		g.fillRect(x, y, 50, 50);
+		x += 10;
+		y += 10;
+	}
+
+	class MyKeyListener extends KeyAdapter
+	{
+
+		@Override
+		public void keyPressed(KeyEvent e)
+		{
+			System.out.println("key pressed");
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e)
+		{
+			System.out.println("key released");
+		}
+
 	}
 }
