@@ -1,17 +1,18 @@
 package com.zx.tank;
-
-import java.awt.Frame;//窗口类
 //
 public class Main
 {
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{
 		TankFrame tf = new TankFrame();
+		while (true)
+		{
+			Thread.sleep(50);//每隔50毫秒窗口重画一次，就会调用paint方法x += 10
+			tf.repaint();
+		}
 		
 		
-		
-
 	}
 	
 
