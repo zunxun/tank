@@ -1,5 +1,6 @@
 package com.zx.tank;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Tank
@@ -9,6 +10,8 @@ public class Tank
 	private static final int SPEED = 5;
 
 	private boolean moving = false;
+
+	private TankFrame tf = null;
 
 	public boolean isMoving()
 	{
@@ -30,17 +33,33 @@ public class Tank
 		this.dir = dir;
 	}
 
-	public Tank(int x, int y, Dir dir)
+	public Tank(int x, int y, Dir dir, TankFrame tf)
 	{
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.tf = tf;
 	}
 
 	public void paint(Graphics g)
 	{
-		g.fillRect(x, y, 50, 50);
+		switch (dir)
+		{
+		case LEFT:
+			g.drawImage(ResourceMgr.tankL, x, y, null);
+			break;
+		case UP:
+			g.drawImage(ResourceMgr.tankU, x, y, null);
+			break;
+		case RIGHT:
+			g.drawImage(ResourceMgr.tankR, x, y, null);
+			break;
+		case DOWN:
+			g.drawImage(ResourceMgr.tankD, x, y, null);
+			break;
+
+		}
 		move();
 
 	}
@@ -65,6 +84,12 @@ public class Tank
 			y += SPEED;
 			break;
 		}
+
+	}
+
+	public void fire()
+	{
+		tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
 
 	}
 
